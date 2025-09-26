@@ -14,7 +14,7 @@ def create_app():
     app.register_blueprint(review_bp)
 
     @app.teardown_appcontext
-    def shutdown_session(exception=None):
+    def teardown_session(exception=None):
         SessionLocal.remove()
 
     return app
