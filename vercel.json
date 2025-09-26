@@ -14,5 +14,13 @@
       "src": "/static/(.*)",
       "dest": "/run.py"
     }
-  ]
+  ],
+  "env": {
+    "PYTHONPATH": "/var/task"
+  },
+  "functions": {
+    "run.py": {
+      "maxDuration": 30
+    }
+  }
 }

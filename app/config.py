@@ -18,12 +18,21 @@ class Config:
     database = os.getenv("DB_NAME", "movie_review")
 
     # 데이터베이스 URI 설정
-    if not TURSO_DATABASE_URL and not TURSO_AUTH_TOKEN:
-        # .env에 값이 있을 시에만 Turso를 사용하도록 설정
-        SQLALCHEMY_DATABASE_URI = f"sqlite+{TURSO_DATABASE_URL}?secure=true"
-        CONNECT_ARGS = {"auth_token": TURSO_AUTH_TOKEN}
+    # Vercel 환경에서는 Turso를, 로컬에서는 MySQL을 사용
+    if os.getenv("VERCEL"):
+        # Vercel 환경에서 Turso 사용
+        if TURSO_DATABASE_URL and TURSO_AUTH_TOKEN:
+            SQLALCHEMY_DATABASE_URI = f"sqlite+{TURSO_DATABASE_URL}?secure=true"
+            CONNECT_ARGS = {"auth_token": TURSO_AUTH_TOKEN}
+            print("\n[INFO] Using Turso Database (Vercel)...\n")
+        else:
+            # Vercel에서 Turso 환경변수가 없으면 SQLite 사용
+            SQLALCHEMY_DATABASE_URI = "sqlite:///movie_review.db"
+            CONNECT_ARGS = {}
+            print("\n[INFO] Using SQLite Database (Vercel)...\n")
     else:
-        print("\n[INFO] Using MySQL Database...\n")
+        # 로컬에서는 MySQL 사용
+        print("\n[INFO] Using MySQL Database (Local)...\n")
         SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{user}:{password}@{host}:{port}/{database}"
         CONNECT_ARGS = {}
 
