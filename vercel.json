@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "builds": [
     {
       "src": "run.py",
@@ -10,11 +9,11 @@
     {
       "src": "/(.*)",
       "dest": "/run.py"
+    },
+    {
+      "src": "/static/(.*)",
+      "dest": "/run.py"
     }
-  ],
-  "functions": {
-    "run.py": {
-      "maxDuration": 60
-    }
-  }
+  ]
 }
+
