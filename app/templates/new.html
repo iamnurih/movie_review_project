@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <title>새 리뷰 작성</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>✨ 새 리뷰 작성</h1>
+                <p class="subtitle">나만의 리뷰를 작성해보세요</p>
+            </div>
+
+            <div class="form-container">
+                <form method="POST">
+                    <div class="form-group">
+                        <label class="form-label">📖 제목</label>
+                        <input
+                            type="text"
+                            name="title"
+                            class="form-input"
+                            required
+                            placeholder="리뷰 제목을 입력하세요"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">📝 내용</label>
+                        <textarea
+                            name="content"
+                            class="form-textarea"
+                            required
+                            placeholder="리뷰 내용을 자세히 작성해주세요"
+                        ></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">⭐ 별점</label>
+                        <input
+                            type="number"
+                            name="rating"
+                            class="form-input"
+                            min="1"
+                            max="5"
+                            required
+                            placeholder="1-5"
+                            style="width: 100px;"
+                        />
+                        <small style="color: #666; margin-left: 10px;">1점(최악) ~ 5점(최고)</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">
+                            💾 저장하기
+                        </button>
+                        <a href="{{ url_for('review.index') }}" class="btn btn-secondary">
+                            ❌ 취소
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <title>리뷰 노트</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>📘 책/영화 리뷰 노트</h1>
+                <p class="subtitle">나만의 리뷰를 기록하고 공유해보세요</p>
+            </div>
+
+            <div class="avg-rating">
+                <span class="stars">⭐</span>
+                <span>평균 별점: </span>
+                <span class="rating-number">{{ avg_rating }}</span>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 30px;">
+                <a href="{{ url_for('review.new_review') }}" class="btn btn-primary">
+                    ✨ 새 리뷰 작성
+                </a>
+            </div>
+
+            <div>
+                {% if reviews %}
+                    {% for review in reviews %}
+                    <div class="review-card">
+                        <h2 class="review-title">{{ review.title }}</h2>
+                        <p class="review-content">{{ review.content }}</p>
+                        <div class="review-rating">
+                            <span class="stars">⭐</span>
+                            {{ review.rating }}점
+                        </div>
+                        <p class="review-date">
+                            작성일: {{ review.created_at.strftime('%Y년 %m월 %d일 %H:%M') }}
+                        </p>
+                        <div class="review-actions">
+                            <a href="{{ url_for('review.edit_review', review_id=review.id) }}" class="edit-link">
+                                수정
+                            </a>
+                            <a href="{{ url_for('review.delete_review_route', review_id=review.id) }}"
+                               class="delete-link"
+                               onclick="return confirm('정말 삭제하시겠습니까?')">
+                                삭제
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <h3>📝 아직 리뷰가 없습니다</h3>
+                        <p>첫 번째 리뷰를 작성해보세요!</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>
