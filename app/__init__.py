@@ -1,6 +1,6 @@
 from flask import Flask
 from app.routes.review_routes import review_bp
-from app.config import config, engine, SessionLocal
+from app.config import Config, engine, SessionLocal
 from app.models import Base
 
 def create_app():

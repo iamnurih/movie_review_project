@@ -9,7 +9,6 @@ def get_all_reviews():
     finally:
         session.close()
 
-
 def create_review(review):
     session = SessionLocal()
     try:
