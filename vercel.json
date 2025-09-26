@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "run.py",
@@ -8,10 +9,6 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/run.py"
-    },
-    {
-      "src": "/static/(.*)",
       "dest": "/run.py"
     }
   ]
