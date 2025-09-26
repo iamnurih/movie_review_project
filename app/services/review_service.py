@@ -1,7 +1,6 @@
 from app.config import SessionLocal
 from app.models import Review
 
-
 def get_all_reviews():
     session = SessionLocal()
     try:

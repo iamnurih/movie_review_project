@@ -1,11 +1,11 @@
 from flask import Flask
-from .routes.review_routes import review_bp
-from .config import Config, engine, SessionLocal
-from .models import Basegit
+from app.routes.review_routes import review_bp
+from app.config import config, engine, SessionLocal
+from app.models import Base
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config)
 
     with app.app_context():
         Base.metadata.create_all(bind=engine)
